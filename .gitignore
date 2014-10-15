@@ -1,0 +1,7 @@
+*.pyc
+config.json
+bin/
+include/
+lib/
+local/
+venv/
