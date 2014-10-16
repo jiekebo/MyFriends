@@ -5,9 +5,9 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 @app.route('/')
 def run_test():
     return 'Testing flask'
+
+if __name__ == '__main__':
+    app.run(debug=True)
