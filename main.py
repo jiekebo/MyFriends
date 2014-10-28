@@ -1,13 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash
+from flask import Flask, render_template
+from flask.ext.restful import Api, Resource
+
+from resources.user import User
 
 app = Flask(__name__)
+api = Api(app)
 
 @app.route('/')
-def run_test():
-    return 'Testing flask'
+@app.route('/<name>')
+def main(name=None):
+    return render_template("login.html", name=name)
+
+api.add_resource(User, '/users/<int:id>', endpoint = 'user')
 
 if __name__ == '__main__':
     app.run(debug=True)
