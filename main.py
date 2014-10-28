@@ -4,6 +4,7 @@ from flask import Flask, render_template
 from flask.ext.restful import Api, Resource
 
 from resources.user import User
+from config import Config
 
 app = Flask(__name__)
 api = Api(app)
@@ -13,7 +14,8 @@ api = Api(app)
 def main(name=None):
     return render_template("login.html", name=name)
 
-api.add_resource(User, '/users/<int:id>', endpoint = 'user')
+api.add_resource(User, '/user/<int:id>', endpoint = 'user')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+  config = Config()
+  app.run(host='127.0.0.1', debug=True)
