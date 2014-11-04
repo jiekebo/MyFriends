@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template
 from flask.ext.restful import Api, Resource
-
-from resources.user import UserView
-from config import Config
 from mongoengine import *
-from bson.json_util import dumps
+
+from config import Config
+from resources.user_view import UserView
 
 app = Flask(__name__)
 api = Api(app)
