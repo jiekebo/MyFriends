@@ -1,9 +1,10 @@
 *.pyc
 .DS_Store
-config.json
 bin/
-include/
 lib/
 local/
 venv/
 *.yaml
+**/node_modules
+.idea/
+main.js

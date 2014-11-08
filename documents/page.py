@@ -1,5 +1,7 @@
-from mongoengine import *
 import datetime
+
+from mongoengine import *
+
 
 class Page(Document):
     title = StringField(max_length=200, required=True)
