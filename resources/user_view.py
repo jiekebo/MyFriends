@@ -10,10 +10,13 @@ parser.add_argument('id', type=int)
 
 
 class UserView(Resource):
-    #@requires_auth
+    # @requires_auth
     def get(self, id):
-        if(id):
-            return User.objects.to_json()
+        if id:
+            resp = Response(response=User.objects.to_json(),
+                            status=200,
+                            mimetype="application/json")
+            return resp
         args = parser.parse_args()
         for user in User.objects(name=args.name):
             return user.to_json()
