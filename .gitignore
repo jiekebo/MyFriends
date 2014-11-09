@@ -1,10 +1,8 @@
+static/
+.idea/
+venv/
+**/node_modules/
+
+*.yaml
 *.pyc
 .DS_Store
-bin/
-lib/
-local/
-venv/
-*.yaml
-**/node_modules
-.idea/
-main.js

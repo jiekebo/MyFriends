@@ -1,7 +1,8 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
-var Configurator = require('./view/User');
+var UserView = require('./view/User');
+var Users = require('./collection/User');
 
 var app = {};
 
@@ -36,7 +37,9 @@ app.router =  Backbone.Router.extend({
 
     home: function () {
         var mainDiv = $('#main');
-        new Configurator({el: mainDiv});
+        var users = new Users();
+        users.fetch();
+        new UserView({el: mainDiv, collection: users});
     }
 });
 

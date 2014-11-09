@@ -6,11 +6,14 @@ from util.auth import *
 parser = reqparse.RequestParser()
 parser.add_argument('name', type=str)
 parser.add_argument('age', type=int)
+parser.add_argument('id', type=int)
 
 
 class UserView(Resource):
-    @requires_auth
-    def get(self):
+    #@requires_auth
+    def get(self, id):
+        if(id):
+            return User.objects.to_json()
         args = parser.parse_args()
         for user in User.objects(name=args.name):
             return user.to_json()
