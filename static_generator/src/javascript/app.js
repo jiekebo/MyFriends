@@ -1,7 +1,10 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
+
 var UserView = require('./view/User');
+var JoinView = require('./view/Join');
+
 var Users = require('./collection/User');
 
 var app = {};
@@ -26,20 +29,28 @@ app.session = Backbone.Model.extend({
 });
 
 app.router =  Backbone.Router.extend({
+    users: new Users(),
+
     initialize: function () {
         Backbone.history.start();
+
     },
 
     routes: {
         '': 'home',
-        'home': 'home'
+        'home': 'home',
+        'user': 'user'
     },
 
     home: function () {
         var mainDiv = $('#main');
-        var users = new Users();
-        users.fetch();
-        new UserView({el: mainDiv, collection: users});
+        new JoinView({el: mainDiv, collection: this.users});
+    },
+
+    user: function () {
+        var mainDiv = $('#main');
+        this.users.fetch();
+        new UserView({el: mainDiv, collection: this.users});
     }
 });
 

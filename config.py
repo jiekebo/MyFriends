@@ -8,22 +8,22 @@ class Config(object):
         with open("config.yaml", "r") as config:
             yaml_config = yaml.load_all(config)
             for doc in yaml_config:
-                Config.readConfig(doc, Config.config)
+                Config.read_config(doc, Config.config)
 
     @staticmethod
-    def readConfig(config, configDict):
+    def read_config(config, config_dict):
         if isinstance(config, list):
             for value in config:
-                Config.readConfig(value, configDict)
+                Config.read_config(value, config_dict)
         elif isinstance(config, dict):
             for key, value in config.items():
                 if isinstance(value, list):
-                    subConfig = dict()
-                    configDict[key] = subConfig
-                    Config.readConfig(value, subConfig)
+                    sub_config = dict()
+                    config_dict[key] = sub_config
+                    Config.read_config(value, sub_config)
                 else:
-                    configDict[key] = value
+                    config_dict[key] = value
 
     @staticmethod
-    def getConfig(system, value):
+    def get_config(system, value):
         return Config.config[system][value]
