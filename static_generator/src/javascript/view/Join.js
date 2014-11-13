@@ -1,19 +1,16 @@
 var Backbone = require('backbone');
 var template = require('../template/Join');
-var Users = require('../collection/User');
+var User = require('../model/User');
 
 module.exports = Backbone.View.extend({
 
     template: template,
 
     events: {
-        "click #join": 'join'
+        'click #join' : 'join'
     },
 
     initialize: function () {
-        this.listenTo(this.collection, 'change', this.render);
-        this.listenTo(this.collection, 'add', this.render);
-        this.listenTo(this.collection, 'remove', this.render);
         this.render();
     },
 
@@ -23,7 +20,15 @@ module.exports = Backbone.View.extend({
     },
 
     join: function () {
-        console.log("blabla");
+        var nickname = this.$('#nickname').val();
+        var email = this.$('#email').val();
+        var password = this.$('#password').val();
+        console.log(nickname);
+        console.log(email);
+        console.log(password);
+        var user = new User();
+        user.set({'nickname':nickname, 'email':email, 'password':password});
+        user.save();
     },
 
     close: function () {
