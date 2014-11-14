@@ -33,7 +33,6 @@ app.router =  Backbone.Router.extend({
 
     initialize: function () {
         Backbone.history.start();
-
     },
 
     routes: {
@@ -48,11 +47,12 @@ app.router =  Backbone.Router.extend({
     },
 
     user: function () {
+        console.log("users")
         var mainDiv = $('#main');
         this.users.fetch();
         new UserView({el: mainDiv, collection: this.users});
     }
 });
 
-new app.session();
+//new app.session();
 new app.router();
