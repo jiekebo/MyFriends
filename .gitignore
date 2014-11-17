@@ -3,6 +3,7 @@ static/
 venv/
 **/node_modules/
 
+**/config.js
 *.yaml
 *.pyc
 .DS_Store
