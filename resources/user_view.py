@@ -3,6 +3,8 @@ from flask.ext.restful import Resource, reqparse
 from documents.user_document import User
 from util.auth import *
 
+from mongoengine import NotUniqueError
+
 parser = reqparse.RequestParser()
 parser.add_argument('nickname', type=str)
 parser.add_argument('email', type=str)
@@ -25,10 +27,14 @@ class UserView(Resource):
         return "created {}".format(id)
 
     def post(self, id=-1):
-        args = parser.parse_args()
-        user = User(nickname=args.nickname, email=args.email, password=args.password)
-        user.save()
-        return "made {}".format(args)
+        try:
+            args = parser.parse_args()
+            user = User(nickname=args.nickname, email=args.email, password=args.password)
+            user.save()
+            return "made {}".format(args)
+        except NotUniqueError, e:
+            return Response(status=403)
+        
 
     def delete(self, id):
         pass

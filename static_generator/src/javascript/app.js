@@ -47,7 +47,6 @@ app.router =  Backbone.Router.extend({
     },
 
     user: function () {
-        console.log("users")
         var mainDiv = $('#main');
         this.users.fetch();
         new UserView({el: mainDiv, collection: this.users});
