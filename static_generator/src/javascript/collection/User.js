@@ -5,7 +5,7 @@ var Config = require('../config');
 module.exports = Backbone.Collection.extend({
 
     model: User,
-    url: Config.URL + Config.API + '/user/1',
+    url: Config.URL + Config.API + '/user/',
     idAttribute: 'id'
 
 });

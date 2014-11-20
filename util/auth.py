@@ -2,12 +2,16 @@ from functools import wraps
 
 from flask import request, Response
 
+from documents.user_document import User
+from passlib.hash import pbkdf2_sha256
 
-def check_auth(username, password):
-    """This function is called to check if a username /
-    password combination is valid.
-    """
-    return username == 'admin' and password == 'secret'
+
+def check_auth(nickname, password):
+    users = User.objects(nickname=nickname)
+    if len(users) <= 0:
+        return False
+    user = users[0]
+    return user.nickname == nickname and pbkdf2_sha256.verify(password, user.password)
 
 
 def authenticate():
