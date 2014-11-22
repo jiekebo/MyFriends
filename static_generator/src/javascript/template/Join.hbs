@@ -16,18 +16,18 @@
     <h1>Jumbotron heading</h1>
     <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
     <p>
-        <form role="form">
+        <form id="signup" role="form">
             <div class="form-group">
-                <label  for="nickname">Nickname</label>
-                <input class="form-control" id="nickname"/>
+                <label for="nickname">Nickname</label>
+                <input class="form-control" id="nickname" required/>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input class="form-control" id="email"/>
+                <input class="form-control" id="email" type="email" data-parsley-trigger="change" required/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input class="form-control" id="password"/>
+                <input class="form-control" id="password" type="password" required/>
             </div>
             <a class="btn btn-lg btn-success" id="join" role="button" href="#">Sign up today</a>
         </form>

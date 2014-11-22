@@ -1,6 +1,5 @@
 var Backbone = require('backbone');
-var $ = require('jquery');
-Backbone.$ = $;
+Backbone.$ = jQuery;
 
 var UserView = require('./view/User');
 var JoinView = require('./view/Join');
@@ -10,7 +9,6 @@ var Users = require('./collection/User');
 var app = {};
 
 app.session = Backbone.Model.extend({
-
     // Initialize with negative/empty defaults
     // These will be overriden after the initial checkAuth
     defaults: {
@@ -19,16 +17,15 @@ app.session = Backbone.Model.extend({
     },
 
     initialize: function () {
-        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-            options.crossDomain ={
+        $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+            options.crossDomain = {
                 crossDomain: true
             };
         });
     }
-
 });
 
-app.router =  Backbone.Router.extend({
+app.router = Backbone.Router.extend({
     users: new Users(),
 
     initialize: function () {

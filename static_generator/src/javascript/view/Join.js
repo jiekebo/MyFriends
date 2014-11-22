@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var parsley = require('parsleyjs');
 var template = require('../template/Join');
 var User = require('../model/User');
 
@@ -12,6 +13,7 @@ module.exports = Backbone.View.extend({
 
     initialize: function () {
         this.render();
+        this.form = this.$('#signup').parsley();
     },
 
     render: function () {
@@ -20,6 +22,9 @@ module.exports = Backbone.View.extend({
     },
 
     join: function () {
+        if(!this.form.validate()) {
+            return;
+        }
         var nickname = this.$('#nickname').val();
         var email = this.$('#email').val();
         var password = this.$('#password').val();

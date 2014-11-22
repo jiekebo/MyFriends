@@ -16,7 +16,7 @@ class UserView(Resource):
     def get(self):
         args = parser.parse_args()
         if args.nickname:
-            return Response(response=User.objects(nickname=args.nickname)[0].to_json(),
+            return Response(response=User.objects(nickname=args.nickname.lower())[0].to_json(),
                             status=200,
                             mimetype="application/json")
         else:
@@ -31,7 +31,7 @@ class UserView(Resource):
         try:
             args = parser.parse_args()
             hash = pbkdf2_sha256.encrypt(args.password, rounds=1000, salt_size=16)
-            user = User(nickname=args.nickname, email=args.email, password=hash)
+            user = User(nickname=args.nickname.lower(), email=args.email, password=hash)
             user.save()
             return "made {}".format(args)
         except NotUniqueError, e:

@@ -7,11 +7,12 @@ from passlib.hash import pbkdf2_sha256
 
 
 def check_auth(nickname, password):
-    users = User.objects(nickname=nickname)
+    case_insensitive_nick = nickname.lower()
+    users = User.objects(nickname=case_insensitive_nick)
     if len(users) <= 0:
         return False
     user = users[0]
-    return user.nickname == nickname and pbkdf2_sha256.verify(password, user.password)
+    return user.nickname == case_insensitive_nick and pbkdf2_sha256.verify(password, user.password)
 
 
 def authenticate():
