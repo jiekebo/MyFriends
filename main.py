@@ -19,7 +19,7 @@ connect(Config.get_config('mongodb', 'database'), host=Config.get_config('mongod
 @app.route('/')
 @app.route('/<name>')
 def main(name=None):
-    return render_template("login.html", name=name)
+    return render_template("index.html", name=name)
 
 
 api.add_resource(UserView, '/api/user/', '/api/user/<int:id>', endpoint='user')

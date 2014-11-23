@@ -1,0 +1,51 @@
+body {
+    background-color: #0D718F;
+}
+
+div.signup {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #fff;
+    width: 500px;
+    margin: 30px auto;
+}
+
+.form-signin {
+    max-width: 400px;
+    padding: 50px 0 50px 0;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading {
+    margin-bottom: 10px;
+}
+
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin input {
+    margin-bottom: -1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+}
+
+.form-signin-heading {
+    color: #D06B4F;
+    text-align: center;
+    font-size: 22px;
+}
+
+IMG.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
