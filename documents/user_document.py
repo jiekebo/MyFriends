@@ -2,6 +2,22 @@ from mongoengine import *
 
 
 class User(Document):
-    nickname = StringField(max_length=200, required=True, unique_with='email')
-    email = EmailField(max_length=200, required=True)
-    password = StringField(max_length=200, required=True)
+    nickname = StringField(
+        min_length=3,
+        max_length=200,
+        required=True,
+        unique=True
+    )
+    email = EmailField(
+        min_length=5,
+        max_length=200,
+        required=True
+    )
+    password = StringField(
+        min_length=8,
+        max_length=200,
+        required=True
+    )
+    meta = {
+        'indexes': ['nickname']
+    }
