@@ -22,7 +22,7 @@ def main(name=None):
     return render_template("index.html", name=name)
 
 
-api.add_resource(UserView, '/api/user/', '/api/user/<int:id>', endpoint='user')
+api.add_resource(UserView, '/api/user', '/api/user/<int:id>', endpoint='user')
 
 if __name__ == '__main__':
     app.run(host=Config.get_config('flask', 'host'), port=Config.get_config('flask', 'port'), debug=True)

@@ -49,3 +49,7 @@ IMG.logo {
     margin-left: auto;
     margin-right: auto
 }
+
+form.login {
+    width: 200px;
+}

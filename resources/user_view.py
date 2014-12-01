@@ -1,8 +1,8 @@
 from flask.ext.restful import Resource, reqparse
 from mongoengine import NotUniqueError
+from passlib.hash import pbkdf2_sha256
 
 from util.auth import *
-from passlib.hash import pbkdf2_sha256
 
 
 parser = reqparse.RequestParser()
@@ -12,18 +12,15 @@ parser.add_argument('password', type=str)
 
 
 class UserView(Resource):
-    @requires_auth
     def get(self):
         args = parser.parse_args()
-        if args.nickname:
-            return Response(response=User.objects(nickname=args.nickname.lower())[0].to_json(),
-                            status=200,
-                            mimetype="application/json")
-        else:
-            return Response(response=User.objects.to_json(),
-                            status=200,
-                            mimetype="application/json")
+        if not args.nickname or not check_auth(args.nickname, args.password):
+            return Response(status=401)
+        return Response(response=User.objects(nickname=args.nickname.lower())[0].to_json(),
+                        status=200,
+                        mimetype="application/json")
 
+    @requires_auth
     def put(self, id):
         return "created {}".format(id)
 
@@ -37,6 +34,6 @@ class UserView(Resource):
         except NotUniqueError, e:
             return Response(status=403)
 
-
+    @requires_auth
     def delete(self, id):
         pass

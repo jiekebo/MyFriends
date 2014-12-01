@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 
+var MainView = require('./view/Main');
 var UserView = require('./view/User');
 var JoinView = require('./view/Join');
 
@@ -11,6 +12,7 @@ module.exports = Backbone.Router.extend({
     routes: {
         '': 'home',
         'home': 'home',
+        'join': 'join',
         'user': 'user'
     },
 
@@ -33,6 +35,10 @@ module.exports = Backbone.Router.extend({
     },
 
     home: function () {
+        this.showView(new MainView({el: this.el, collection: this.users}));
+    },
+
+    join: function () {
         this.showView(new JoinView({el: this.el, collection: this.users}));
     },
 
