@@ -26,8 +26,8 @@ module.exports = Backbone.Model.extend({
     },
 
     logout: function() {
-        localStorage.removeItem('configurator');
-        localStorage.removeItem('configurator_user');
+        localStorage.removeItem('auth');
+        localStorage.removeItem('user');
         this.clear();
         $.ajaxSetup({
             headers: {}

@@ -37,14 +37,16 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <p class="navbar-text">Welcome back {{_id}}</p>
+            {{#if _id}}
+                <p class="navbar-text">Welcome back {{_id}}</p>
+            {{/if}}
             <ul class="nav navbar-nav navbar-right">
                 {{#if _id}}
-                    <button type="button" class="btn btn-default navbar-btn">Log out</button>
+                    <button id="logout" type="button" class="btn btn-default navbar-btn">Log out</button>
                 {{else}}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign
-                            In <span class="fa fa-caret-down"></span></a>
+                        <button href="#" class="btn btn-primary navbar-btn" data-toggle="dropdown" role="button"
+                                aria-expanded="false">Sign In <span class="fa fa-caret-down"></span></button>
 
                         <div class="dropdown-menu" role="menu" style="padding:17px;">
 
@@ -65,7 +67,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="#home" id="login" class="btn btn-block btn-primary" data-toggle="dropdown" role="button"
+                                    <a href="#home" id="login" class="btn btn-block btn-primary" data-toggle="dropdown"
+                                       role="button"
                                        aria-expanded="false">OK</a>
                                 </div>
                                 <a href="#join">Join!</a>
