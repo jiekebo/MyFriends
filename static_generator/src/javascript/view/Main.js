@@ -1,5 +1,7 @@
 var Backbone = require('backbone');
 var Bootstrap = require('bootstrap');
+var _ = require('lodash');
+
 var eventbus = require('../eventbus');
 var template = require('../template/Main');
 var User = require('../model/User');
@@ -12,31 +14,32 @@ module.exports = Backbone.View.extend({
         'click #login': 'login'
     },
 
-    initialize: function () {
+    initialize: function() {
         this.render();
     },
 
-    render: function () {
-        this.$el.html(this.template(this.collection.toJSON()));
+    render: function() {
+        var user = localStorage.getItem('user');
+        this.$el.html(this.template(JSON.parse(user)));
         return this;
     },
 
-    close: function () {
+    close: function() {
         this.stopListening();
     },
 
-    login: function () {
+    login: function() {
         var username = this.$("#username").val();
         var password = this.$("#password").val();
         var user = new User();
         user.login({
-            'success': function(response) {
-                console.log(response);
-            },
-            'error': function(response) {
+            success: _.bind(function(response) {
+                this.render();
+            }, this),
+            error: _.bind(function(response) {
                 console.log(response);
                 console.log("test");
-            }
+            }, this)
         }, {nickname:username, password:password});
     }
 

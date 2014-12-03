@@ -18,8 +18,8 @@ class UserView(Resource):
         user = User.objects(nickname=args.nickname.lower())[0]
         user.password = None
         return Response(response=user.to_json(),
-                        status=200,
-                        mimetype="application/json")
+                        mimetype="application/json",
+                        status=200)
 
     @requires_auth
     def put(self, id):
@@ -34,7 +34,10 @@ class UserView(Resource):
                 password=create_hash(args.password)
             )
             user.save(force_insert=True)
-            return Response(status=201)
+            user.password = None
+            return Response(response=user.to_json(),
+                            mimetype="application/json",
+                            status=201)
         except NotUniqueError, e:
             return Response(status=403)
 

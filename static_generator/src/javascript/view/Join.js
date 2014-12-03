@@ -1,5 +1,7 @@
 var Backbone = require('backbone');
 var parsley = require('parsleyjs');
+var _ = require('lodash');
+
 var template = require('../template/Join');
 var User = require('../model/User');
 
@@ -8,32 +10,43 @@ module.exports = Backbone.View.extend({
     template: template,
 
     events: {
-        'click #join' : 'join'
+        'submit': 'join',
+        'change model': 'render'
     },
 
-    initialize: function () {
+    initialize: function(option) {
+        this.router = option.router;
+        this.model = new User();
+        this.listenTo(this.model, 'change', this.render);
         this.render();
-        this.form = this.$('#signup').parsley();
     },
 
-    render: function () {
-        this.$el.html(this.template(this.collection.toJSON()));
+    render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        this.form = this.$('#signup').parsley();
         return this;
     },
 
-    join: function () {
+    join: function(e) {
+        e.preventDefault();
         if(!this.form.validate()) {
             return;
         }
         var nickname = this.$('#nickname').val();
         var email = this.$('#email').val();
         var password = this.$('#password').val();
-        var user = new User();
-        user.set({'nickname':nickname, 'email':email, 'password':password});
-        user.save();
+
+        this.model.save({'nickname':nickname, 'email':email, 'password':password}, {
+            success: _.bind(function(model, resp) {
+                this.router.navigate('home', {trigger:true, replace:true});
+            }, this),
+            error: _.bind(function(model, resp) {
+                this.$('#nickname-error').removeClass('hidden');
+            }, this)
+        });
     },
 
-    close: function () {
+    close: function() {
         this.stopListening();
     }
 

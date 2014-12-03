@@ -6,17 +6,17 @@
 
         <div class="form-group">
             <label for="nickname">Nickname</label>
-            <input class="form-control" id="nickname" data-parsley-length="[3, 200]" data-parsley-trigger="change" required/>
+            <input class="form-control" id="nickname" data-parsley-length="[3, 200]" data-parsley-trigger="change" value="{{nickname}}" required>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input class="form-control" id="email" type="email" data-parsley-length="[5, 200]" data-parsley-trigger="change" required/>
+            <input class="form-control" id="email" type="email" data-parsley-length="[5, 200]" data-parsley-trigger="change" value="{{email}}" required/>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input class="form-control" id="password" type="password" data-parsley-minlength="8" data-parsley-trigger="change" required/>
+            <input class="form-control" id="password" type="password" data-parsley-minlength="8" data-parsley-trigger="change" value="{{password}}" required/>
         </div>
-        <a class="btn btn-lg btn-primary" id="join" role="button" href="#">Sign up today</a>
-        <a href="#user" class="pull-right">Users</a>
+        <div class="alert alert-warning hidden" id="nickname-error" role="alert">Nickname {{nickname}} is already taken...</div>
+        <button type="submit" class="btn btn-lg btn-primary">Sign up today</button>
     </form>
 </div>

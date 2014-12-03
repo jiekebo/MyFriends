@@ -18,31 +18,31 @@ module.exports = Backbone.Router.extend({
 
     el: $("#main"),
 
-    initialize: function () {
+    initialize: function() {
         Backbone.history.start();
     },
 
-    showView: function (view) {
+    showView: function(view) {
         var closingView = this.view;
         this.view = view;
         this.closeView(closingView);
     },
 
-    closeView: function (view) {
+    closeView: function(view) {
         if (view) {
             view.close();
         }
     },
 
-    home: function () {
+    home: function() {
         this.showView(new MainView({el: this.el, collection: this.users}));
     },
 
-    join: function () {
-        this.showView(new JoinView({el: this.el, collection: this.users}));
+    join: function() {
+        this.showView(new JoinView({el: this.el, collection: this.users, router: this}));
     },
 
-    user: function () {
+    user: function() {
         this.users.fetch();
         this.showView(new UserView({el: this.el, collection: this.users}));
     }
