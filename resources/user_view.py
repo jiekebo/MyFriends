@@ -1,6 +1,5 @@
 from flask.ext.restful import Resource, reqparse
 from mongoengine import NotUniqueError
-from passlib.hash import pbkdf2_sha256
 
 from util.auth import *
 
@@ -16,7 +15,9 @@ class UserView(Resource):
         args = parser.parse_args()
         if not args.nickname or not check_auth(args.nickname, args.password):
             return Response(status=401)
-        return Response(response=User.objects(nickname=args.nickname.lower())[0].to_json(),
+        user = User.objects(nickname=args.nickname.lower())[0]
+        user.password = None
+        return Response(response=user.to_json(),
                         status=200,
                         mimetype="application/json")
 
@@ -27,10 +28,13 @@ class UserView(Resource):
     def post(self):
         try:
             args = parser.parse_args()
-            hash = pbkdf2_sha256.encrypt(args.password, rounds=1000, salt_size=16)
-            user = User(nickname=args.nickname.lower(), email=args.email, password=hash)
-            user.save()
-            return "made {}".format(args)
+            user = User(
+                nickname=args.nickname.lower(),
+                email=args.email,
+                password=create_hash(args.password)
+            )
+            user.save(force_insert=True)
+            return Response(status=201)
         except NotUniqueError, e:
             return Response(status=403)
 

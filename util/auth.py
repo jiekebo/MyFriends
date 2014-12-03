@@ -1,9 +1,9 @@
 from functools import wraps
 
 from flask import request, Response
+from passlib.hash import pbkdf2_sha256
 
 from documents.user_document import User
-from passlib.hash import pbkdf2_sha256
 
 
 def check_auth(nickname, password):
@@ -13,6 +13,10 @@ def check_auth(nickname, password):
         return False
     user = users[0]
     return user.nickname == case_insensitive_nick and pbkdf2_sha256.verify(password, user.password)
+
+
+def create_hash(password):
+    return pbkdf2_sha256.encrypt(password, rounds=1000, salt_size=16)
 
 
 def authenticate():

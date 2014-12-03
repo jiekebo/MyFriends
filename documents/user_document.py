@@ -6,7 +6,7 @@ class User(Document):
         min_length=3,
         max_length=200,
         required=True,
-        unique=True
+        primary_key=True
     )
     email = EmailField(
         min_length=5,

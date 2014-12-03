@@ -35,6 +35,7 @@ module.exports = Backbone.View.extend({
             },
             'error': function(response) {
                 console.log(response);
+                console.log("test");
             }
         }, {nickname:username, password:password});
     }

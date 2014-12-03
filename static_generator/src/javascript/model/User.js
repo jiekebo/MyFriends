@@ -5,12 +5,7 @@ module.exports = Backbone.Model.extend({
 
     urlRoot: config.URL + config.API + '/user',
 
-    // Initialize with negative/empty defaults
-    // These will be overriden after the initial checkAuth
-    /*defaults: {
-        logged_in: false,
-        user_id: ''
-    },*/
+    idAttribute: "_id",
 
     login: function (callback, args) {
         var self = this;
@@ -20,8 +15,8 @@ module.exports = Backbone.Model.extend({
                 self.set({logged_in: true});
                 var authString = self.createBasicAuthString(args.username, args.password);
                 self.ajaxConfig(authString);
-                localStorage.setItem('configurator', authString);
-                localStorage.setItem('configurator_user', JSON.stringify(res));
+                localStorage.setItem('auth', authString);
+                localStorage.setItem('user', JSON.stringify(res));
                 if ('success' in callback) callback.success(mod, res);
             }, error: function (mod, res) {
                 self.set({logged_in: false});
