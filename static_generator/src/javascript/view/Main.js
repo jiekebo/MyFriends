@@ -11,7 +11,7 @@ module.exports = Backbone.View.extend({
     template: template,
 
     events: {
-        'click #login': 'login',
+        'submit #login': 'login',
         'click #logout': 'logout'
     },
 
@@ -29,6 +29,14 @@ module.exports = Backbone.View.extend({
         } else {
             this.$el.html(this.template());
         }
+        /*$('#login-dropdown').on('hide.bs.dropdown', function () {
+            return false;
+        });*/
+        $('#login-dropdown .dropdown-menu').on({
+            "click":function(e){
+                e.stopPropagation();
+            }
+        });
         return this;
     },
 
@@ -37,7 +45,8 @@ module.exports = Backbone.View.extend({
         this.undelegateEvents();
     },
 
-    login: function () {
+    login: function (e) {
+        e.preventDefault();
         var username = this.$("#username").val();
         var password = this.$("#password").val();
         this.user = new User();

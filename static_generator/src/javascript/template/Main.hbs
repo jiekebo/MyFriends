@@ -44,7 +44,7 @@
                 {{#if _id}}
                     <button id="logout" type="button" class="btn btn-default navbar-btn">Log out</button>
                 {{else}}
-                    <li class="dropdown">
+                    <li id="login-dropdown" class="dropdown">
                         <button href="#" class="btn btn-primary navbar-btn" data-toggle="dropdown" role="button"
                                 aria-expanded="false">Sign In <span class="fa fa-caret-down"></span></button>
 
@@ -52,7 +52,7 @@
 
                             <h4>Please Sign In</h4>
 
-                            <form class="form login">
+                            <form id="login" action="submit" class="form login">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
@@ -67,9 +67,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="#home" id="login" class="btn btn-block btn-primary" data-toggle="dropdown"
-                                       role="button"
-                                       aria-expanded="false">OK</a>
+                                    <button class="btn btn-block btn-primary" data-toggle="dropdown" role="button"
+                                            aria-expanded="false">OK
+                                    </button>
                                 </div>
                                 <a href="#join">Join!</a>
                             </form>
