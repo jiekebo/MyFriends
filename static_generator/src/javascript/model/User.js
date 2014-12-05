@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
 
     idAttribute: "_id",
 
-    login: function(callback, args) {
+    login: function (callback, args) {
         var self = this;
         this.fetch({
             data: args,
@@ -25,7 +25,7 @@ module.exports = Backbone.Model.extend({
         });
     },
 
-    logout: function() {
+    logout: function () {
         localStorage.removeItem('auth');
         localStorage.removeItem('user');
         this.clear();
@@ -34,13 +34,13 @@ module.exports = Backbone.Model.extend({
         });
     },
 
-    ajaxConfig: function(authString) {
+    ajaxConfig: function (authString) {
         $.ajaxSetup({
             headers: {'Authorization': 'Basic ' + authString}
         });
     },
 
-    loadUser: function() {
+    loadUser: function () {
         var userData = JSON.parse(localStorage.getItem('configurator_user'));
         this.set({
             address: userData.address,
@@ -52,7 +52,7 @@ module.exports = Backbone.Model.extend({
         });
     },
 
-    createBasicAuthString: function(username, password) {
+    createBasicAuthString: function (username, password) {
         return btoa(username + ':' + password);
     }
 

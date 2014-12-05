@@ -15,17 +15,16 @@ module.exports = Backbone.View.extend({
         'click #logout': 'logout'
     },
 
-    initialize: function() {
+    initialize: function () {
         var userStore = localStorage.getItem('user');
-        if(userStore) {
+        if (userStore) {
             this.user = new User(JSON.parse(userStore));
         }
         this.render();
     },
 
-    render: function() {
-        //var user = localStorage.getItem('user');
-        if(this.user) {
+    render: function () {
+        if (this.user) {
             this.$el.html(this.template(this.user.toJSON()));
         } else {
             this.$el.html(this.template());
@@ -33,25 +32,26 @@ module.exports = Backbone.View.extend({
         return this;
     },
 
-    close: function() {
+    close: function () {
         this.stopListening();
+        this.undelegateEvents();
     },
 
-    login: function() {
+    login: function () {
         var username = this.$("#username").val();
         var password = this.$("#password").val();
         this.user = new User();
         this.user.login({
-            success: _.bind(function() {
+            success: _.bind(function () {
                 this.render();
             }, this),
-            error: _.bind(function() {
+            error: _.bind(function () {
                 console.log("test");
             }, this)
-        }, {nickname:username, password:password});
+        }, {nickname: username, password: password});
     },
 
-    logout: function() {
+    logout: function () {
         this.user.logout();
         this.render();
     }

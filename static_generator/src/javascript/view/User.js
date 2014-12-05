@@ -9,19 +9,19 @@ module.exports = Backbone.View.extend({
 
     events: {},
 
-    initialize: function() {
+    initialize: function () {
         this.listenTo(this.collection, 'change', this.render);
         this.listenTo(this.collection, 'add', this.render);
         this.listenTo(this.collection, 'remove', this.render);
         this.render();
     },
 
-    render: function() {
+    render: function () {
         this.$el.html(this.template(this.collection.toJSON()));
         return this;
     },
 
-    close: function() {
+    close: function () {
         this.stopListening();
     }
 
