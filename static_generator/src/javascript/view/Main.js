@@ -55,7 +55,8 @@ module.exports = Backbone.View.extend({
                 this.render();
             }, this),
             error: _.bind(function () {
-                console.log("test");
+                this.$('#login .input-group').addClass('has-error');
+                this.$('#login-error').removeClass('hidden');
             }, this)
         }, {nickname: username, password: password});
     },
