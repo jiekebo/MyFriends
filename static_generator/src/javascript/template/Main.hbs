@@ -9,7 +9,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="static/img/myfriends.png" style="width: 145px;">
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,20 +39,13 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            {{#if _id}}
-                <p class="navbar-text">Welcome back {{_id}}</p>
-            {{/if}}
             <ul class="nav navbar-nav navbar-right">
                 {{#if _id}}
                     <button id="logout" type="button" class="btn btn-default navbar-btn">Log out</button>
                 {{else}}
-                    <li>
-                        <a href="#join">Join!</a>
-                    </li>
                     <li id="login-dropdown" class="dropdown">
                         <button class="btn btn-primary dropdown-toggle navbar-btn" data-toggle="dropdown" role="button"
                                 aria-expanded="false">Sign In <span class="fa fa-caret-down"></span></button>
-
                         <div class="dropdown-menu" role="menu" style="padding:17px;">
                             <label for="login">Please Sign In</label>
 
@@ -83,7 +78,6 @@
                             </form>
                         </div>
                     </li>
-
                 {{/if}}
             </ul>
         </div>
@@ -91,3 +85,41 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+{{#if _id}}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">User Profile : {{_id}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nickname</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">
+                                {{_id}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">E-Mail</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">
+                                {{email}}
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Welcome to MyFriends!</h3>
+        </div>
+        <div class="panel-body">
+            <a href="#join">Join us!</a>
+        </div>
+    </div>
+{{/if}}

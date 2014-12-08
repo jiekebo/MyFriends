@@ -29,9 +29,6 @@ module.exports = Backbone.View.extend({
         } else {
             this.$el.html(this.template());
         }
-        /*$('#login-dropdown').on('hide.bs.dropdown', function () {
-            return false;
-        });*/
         $('#login-dropdown .dropdown-menu').on({
             "click":function(e){
                 e.stopPropagation();
